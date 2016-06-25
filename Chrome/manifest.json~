@@ -1,9 +1,10 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
   "name": "FriendOnym",
   "version": "0.1",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "html" : ["index.html"]
   },
   "web_accessible_resources": ["books.xml"] ,
   "content_scripts": [

@@ -13,27 +13,14 @@ var mapName={};
 function create()
 {
 
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	        myFunction(xhttp);
-	    }
-	};
-	xhttp.open("GET", chrome.extension.getURL('books.xml'), true);
-	xhttp.send();
-	function myFunction(xml) 
-	{
-	    var xmlDoc 	= xml.responseXML;
-    	Doc  		= xmlDoc.getElementsByTagName("friendonym")[0];
-    	persons 	= Doc.getElementsByTagName("person");
-    	// var xmlText = new XMLSerializer().serializeToString(Doc);
-    	for (var i = persons.length - 1; i >= 0; i--) {
-    	pname = persons[i].getAttribute("Pname");
-    	rname = persons[i].getAttribute("Rname");
-    	mapName[rname]=pname;
-    	}
-    	// $("#programatically").attr("href",);​
-	}
+	chrome.storage.sync.get(/* String or Array */null, function(items)
+	    {
+	    	for (var key in items) {
+			    if (items.hasOwnProperty(key)) {
+					mapName[key]=items[key];
+			    }
+			}
+		});
 }		
 
 function aText(obj)
